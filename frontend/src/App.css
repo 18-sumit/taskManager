@@ -1,0 +1,291 @@
+@import "tailwindcss";
+
+:root {
+  --background-color: #f0f2f5;
+  --primary-color: #ffffff;
+  --text-color: #333;
+  --subtle-text-color: #666;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --accent-color: #007bff;
+  --accent-hover-color: #0056b3;
+  --danger-color: #dc3545;
+  --danger-hover-color: #c82333;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+  --border-radius: 8px;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+header h1 {
+  text-align: center;
+  color: var(--accent-color);
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.controls-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  align-items: start;
+  width: 100%;
+}
+
+.add-task-form, .filter-controls {
+  background: var(--primary-color);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.add-task-form h2, .filter-controls h2 {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+}
+
+/* Form styling */
+.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-group input, .form-group textarea {
+  width: 100%;
+  padding: 1.2rem 0.8rem 0.4rem;
+  border: 1px solid var(--border-color);
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+  box-sizing: border-box;
+  color: var(--text-color);
+}
+
+.form-group input:focus, .form-group textarea:focus {
+  border-color: var(--accent-color);
+  background-color: var(--primary-color);
+}
+
+.form-group label {
+  position: absolute;
+  top: 0.8rem;
+  left: 0.9rem;
+  color: var(--subtle-text-color);
+  transition: all 0.2s ease;
+  pointer-events: none;
+  background-color: transparent;
+  padding: 0 4px;
+}
+
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label,
+.form-group textarea:focus + label,
+.form-group textarea:not(:placeholder-shown) + label {
+  top: -0.6rem;
+  left: 0.6rem;
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  background-color: var(--primary-color);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+  background-color: var(--accent-hover-color);
+}
+
+/* Select dropdowns */
+.filter-controls select, .status-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: var(--text-color);
+  background-color: #f8f9fa;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.filter-controls select:last-child {
+  margin-bottom: 0;
+}
+
+.status-select {
+  width: auto;
+  padding-right: 2.5rem;
+  margin-bottom: 0;
+}
+
+/* Task List - FIX: Ensure task list spans full width */
+.task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-card {
+  background: var(--primary-color);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.task-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+.task-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.task-card h3 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.task-description {
+  flex-grow: 1;
+  color: var(--subtle-text-color);
+  margin-bottom: 1rem;
+}
+
+.task-assignee {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.task-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+.delete-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  background-color: var(--danger-color);
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: var(--danger-hover-color);
+}
+
+/* Status Tags */
+.status-tag {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+.status-to-do {
+  background-color: #fff3cd;
+  color: #856404;
+}
+.status-in-progress {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+.status-done {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+/* Loading and No Tasks Message */
+.loading-text, .no-tasks-message {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--subtle-text-color);
+  padding: 3rem;
+  width: 100%;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .controls-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 1rem;
+  }
+  header h1 {
+    font-size: 1.8rem;
+  }
+  .task-list {
+    grid-template-columns: 1fr;
+  }
+}
